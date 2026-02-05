@@ -1,0 +1,27 @@
+---
+import Layout from '@layouts/Layout.astro';
+import HomeIcon from '@components/control/HomeIcon.astro';
+import { getTranslations, type SupportedLocale } from '@/utils/i18n';
+import { CompoundInterestCalculator } from '@/components/tools/compound-interest';
+import '@/styles/globals.css';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'zh' }, props: { locale: 'zh' as SupportedLocale } },
+    { params: { lang: 'en' }, props: { locale: 'en' as SupportedLocale } },
+    { params: { lang: 'ja' }, props: { locale: 'ja' as SupportedLocale } },
+  ];
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+---
+
+<Layout>
+  <HomeIcon />
+  <CompoundInterestCalculator
+    client:load
+    locale={locale}
+    translations={t.compoundInterest}
+  />
+</Layout>

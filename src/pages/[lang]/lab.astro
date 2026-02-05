@@ -3,9 +3,15 @@ import Layout from '@layouts/Layout.astro';
 import { labConfig } from '@/config';
 import HomeIcon from '@components/control/HomeIcon.astro';
 import IconModule from '@components/misc/IconModule.astro';
-import { getLocale, getTranslations, getLocaleStaticPaths } from '@/utils/i18n';
+import { getTranslations, type SupportedLocale } from '@/utils/i18n';
 
-export const getStaticPaths = () => getLocaleStaticPaths('lang');
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'zh' }, props: { locale: 'zh' as SupportedLocale } },
+    { params: { lang: 'en' }, props: { locale: 'en' as SupportedLocale } },
+    { params: { lang: 'ja' }, props: { locale: 'ja' as SupportedLocale } },
+  ];
+}
 
 interface Project {
   name: string;
@@ -15,8 +21,16 @@ interface Project {
   color?: string;
 }
 
-const locale = getLocale(Astro.currentLocale);
+const { locale } = Astro.props;
 const t = getTranslations(locale);
+
+// Helper to convert internal URLs to current locale
+const getLocalizedUrl = (url: string) => {
+  if (url.startsWith('/') && url.match(/^\/(zh|en|ja)\//)) {
+    return url.replace(/^\/(zh|en|ja)\//, `/${locale}/`);
+  }
+  return url;
+};
 ---
 
 <Layout title={t.common.labTitle}>
@@ -25,10 +39,10 @@ const t = getTranslations(locale);
     <h1>{t.common.labTitle}</h1>
     <div class="projects-grid">
       {labConfig.map((project: Project) => (
-        <a 
-          href={project.url}
-          {...project.url.startsWith('/') 
-            ? {} 
+        <a
+          href={getLocalizedUrl(project.url)}
+          {...project.url.startsWith('/')
+            ? {}
             : { target: "_blank", rel: "noopener noreferrer" }}
           class="project-card"
         >

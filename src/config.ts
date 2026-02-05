@@ -126,6 +126,13 @@ export const profileConfig: ProfileConfig = {
 export const labConfig: LabConfig = [
     // Icon and color rules are same as profileConfig
     {
+        name: "Compound Interest Calculator",
+        description: "复利计算器 - 见证时间与复利的力量",
+        url: "/zh/tools/compound-interest",
+        icon: "fa6-solid:calculator",
+        color: "#10b981"
+    },
+    {
         name: "EV Hosting",
         description: "A hosting service for my projects",
         url: "https://client.einverne.info",
