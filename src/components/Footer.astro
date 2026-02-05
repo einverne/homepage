@@ -1,0 +1,129 @@
+---
+import { profileConfig } from "../config";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import {
+    getLocale,
+    getTranslations,
+    supportedLocales,
+    localeLabels,
+} from '@/utils/i18n';
+
+let introPage : string;
+
+if (profileConfig.introPage) {
+    introPage = profileConfig.introPage;
+} else {
+    introPage = import.meta.env.BASE_URL;
+}
+
+const locale = getLocale(Astro.currentLocale);
+const t = getTranslations(locale);
+const pathname = Astro.url.pathname;
+const pathWithoutLocale = pathname.replace(new RegExp(`^/${locale}`), '') || '/';
+const cleanPath = pathWithoutLocale.replace(/^\//, '');
+const localeLinks = supportedLocales.map((targetLocale) => ({
+    locale: targetLocale,
+    label: localeLabels[targetLocale],
+    url: getRelativeLocaleUrl(targetLocale, cleanPath),
+}));
+---
+
+<div class="footer">
+    <div class="text">
+        {t.footer.madeWith} <a target="_self" href={introPage}>{profileConfig.name}</a>{t.footer.madeWithSuffix}
+        <br>
+        {t.footer.poweredBy} <a target="_blank" href="https://astro.build">Astro</a>
+        <br>
+    </div>
+    <div class="locale-switcher" aria-label="Language selector">
+        <span class="label">{t.footer.languageLabel}</span>
+        <div class="locale-links">
+            {localeLinks.map((item) => (
+                <a
+                    class:list={['locale-link', item.locale === locale && 'is-active']}
+                    href={item.url}
+                >
+                    {item.label}
+                </a>
+            ))}
+        </div>
+    </div>
+</div>
+
+<style>
+
+    .footer{
+        width: 100%;
+        padding-bottom: 20px;
+        padding-top: 40px;
+    }
+
+    .footer .text{
+        text-align: center;
+        font-size: 14px;
+        color: var(--footer-text-color);
+        /* font-family: 'Comic Sans MS'; */
+    }
+    
+    .footer a {
+        color: inherit;
+        /* transition: color 0.3s ease; */
+        text-decoration: none;
+        position: relative;
+        display: inline-block;
+    }
+
+    .locale-switcher {
+        margin-top: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        color: var(--footer-text-color);
+        font-size: 13px;
+    }
+
+    .locale-links {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .locale-link {
+        padding: 2px 8px;
+        border-radius: 999px;
+        border: 1px solid color-mix(in srgb, var(--border-color) 60%, transparent);
+        text-decoration: none;
+    }
+
+    .locale-link.is-active {
+        color: var(--link-color);
+        border-color: var(--link-color);
+        font-weight: 600;
+    }
+    
+    .footer a::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        border-bottom-style: dotted;
+        border-bottom-width: 2px;
+        /* background: currentColor; */
+        transition: transform 0.3s ease;
+        transform-origin: right;
+        transform: scaleX(1);
+    }
+    
+    .footer a:hover {
+        color: var(--link-color);
+    }
+    
+    .footer a:hover::before {
+        transform-origin: right;
+        transform: scaleX(0);
+    }
+</style>

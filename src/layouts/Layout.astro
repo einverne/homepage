@@ -1,0 +1,184 @@
+---
+import { siteConfig } from '@/config';
+import { url } from '@utils/url-utils';
+import { getLocaleLangTag } from '@/utils/i18n';
+import ThemeIcon from '@components/control/ThemeIcon.astro';
+import SiteNavi from '@components/control/SiteNavi.astro';
+import SponsorButton from '@components/control/SponsorButton.astro';
+import Footer from '@components/Footer.astro';
+import { ClientRouter } from "astro:transitions";
+
+const pageTitle = `${siteConfig.title} - ${siteConfig.subTitle}`;
+const backgroundImageEnabled = siteConfig.backgroundImage.enabled;
+const backgroundImageUrl = url(siteConfig.backgroundImage.url);
+const localeLangTag = getLocaleLangTag(Astro.currentLocale);
+
+
+---
+<!DOCTYPE html>
+<html lang={localeLangTag}>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href={url(siteConfig.favicon)} type="image/x-icon">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps"> -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+    <title>{pageTitle}</title>
+    <ClientRouter />
+    <script defer src="https://u.einverne.info/my.js" data-website-id="b8fad9f7-dd19-451e-b8d7-54b2525b2fbf"></script>
+</head>
+<body class="layout-body">
+    { siteConfig.mirrorSite?.enabled && <SiteNavi /> }
+    <ThemeIcon />
+    <SponsorButton />
+    <main class="main-content">
+        <slot />
+    </main>
+    <Footer />
+</body>
+
+</html>
+
+
+<style is:global define:vars={{}}>
+/* @font-face {
+  font-family: 'Comic Sans MS';
+  src: url('/fonts/ComicSansMS.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+} */
+
+/* @font-face {
+  font-family: 'Comic Sans MS';
+  src: url('/fonts/ComicSansMS-Bold.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+} */
+/* 默认主体，白天模式 */
+:root {
+    --bg-color: #f7f7ff;
+    --text-color: #000000;
+    --footer-text-color: #000000;
+    --link-color: #003b6e;
+    --motto-text-color: #999;
+    --border-color: gray;
+
+    --image-shadow-color: rgba(0, 0, 0, 0.15);
+    
+    /* 弥散渐变背景相关变量 */
+    --color-background-primary: #F8F8F8;
+    --color-text: #333;
+    --color-content-bg: rgba(255, 255, 255, 0.85);
+    --color-shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* 黑暗模式 */
+[data-theme="dark"] {
+    --bg-color: #031116;
+    --text-color: #ffffff;
+    --footer-text-color: #ffffff;
+    --link-color: #57ace7;
+    --motto-text-color: #c9d0d4;
+    --border-color: gray;
+
+    --image-shadow-color: rgba(59, 130, 246, 0.4);
+    
+    /* 黑暗模式弥散渐变背景相关变量 */
+    --color-background-primary: #121212;
+    --color-text: #E0E0E0; 
+    --color-content-bg: rgba(30, 30, 30, 0.85);
+    --color-shadow: rgba(255, 255, 255, 0.1);
+}
+
+.layout-body { 
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.main-content { 
+    flex: 1;
+}
+
+html, body { 
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Source Serif 4', 'Noto Serif', serif;
+    font-weight: 400;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: var(--color-background-primary); /* 使用新变量 */
+    color: var(--text-color);
+    position: relative;
+    height: 100%;
+    width: 100%;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* 现代感网格渐变背景 */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    
+    background:
+        radial-gradient(1200px 600px at 10% 0%, rgba(102, 130, 180, 0.35), transparent 60%),
+        radial-gradient(900px 700px at 85% 20%, rgba(86, 160, 153, 0.28), transparent 55%),
+        radial-gradient(800px 800px at 60% 90%, rgba(180, 150, 110, 0.22), transparent 55%),
+        conic-gradient(from 210deg at 80% 60%, rgba(76, 99, 150, 0.16), transparent 50%),
+        linear-gradient(140deg, rgba(255, 255, 255, 0.9), rgba(246, 248, 250, 0.9));
+    filter: blur(40px);
+    opacity: 0.9;
+    transition: opacity 0.5s ease, background 0.5s ease;
+    pointer-events: none;
+}
+
+/* 纹理层，提升现代感 */
+body::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+        linear-gradient(0deg, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 36px 36px;
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+}
+
+/* 黑暗模式下的弥散渐变 */
+[data-theme="dark"] body::before {
+    background:
+        radial-gradient(1000px 700px at 15% 10%, rgba(40, 80, 140, 0.45), transparent 60%),
+        radial-gradient(900px 700px at 80% 20%, rgba(40, 120, 120, 0.35), transparent 60%),
+        radial-gradient(900px 900px at 60% 90%, rgba(120, 90, 60, 0.25), transparent 60%),
+        conic-gradient(from 120deg at 70% 55%, rgba(30, 60, 110, 0.25), transparent 55%),
+        linear-gradient(160deg, rgba(10, 16, 24, 0.98), rgba(12, 18, 30, 0.98));
+    opacity: 0.85;
+}
+
+[data-theme="dark"] body::after {
+    background-image:
+        linear-gradient(0deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    opacity: 0.22;
+    mix-blend-mode: screen;
+}

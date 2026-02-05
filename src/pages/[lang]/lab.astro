@@ -1,0 +1,113 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { labConfig } from '@/config';
+import HomeIcon from '@components/control/HomeIcon.astro';
+import IconModule from '@components/misc/IconModule.astro';
+import { getLocale, getTranslations, getLocaleStaticPaths } from '@/utils/i18n';
+
+export const getStaticPaths = () => getLocaleStaticPaths('lang');
+
+interface Project {
+  name: string;
+  description: string;
+  url: string;
+  icon: string;
+  color?: string;
+}
+
+const locale = getLocale(Astro.currentLocale);
+const t = getTranslations(locale);
+---
+
+<Layout title={t.common.labTitle}>
+  <HomeIcon />
+  <div class="container">
+    <h1>{t.common.labTitle}</h1>
+    <div class="projects-grid">
+      {labConfig.map((project: Project) => (
+        <a 
+          href={project.url}
+          {...project.url.startsWith('/') 
+            ? {} 
+            : { target: "_blank", rel: "noopener noreferrer" }}
+          class="project-card"
+        >
+          <div class="project-icon">
+            <IconModule icon={project.icon} size={28} color={project.color} />
+          </div>
+          <div class="project-info">
+            <h3>{project.name}</h3>
+            <p>{project.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .project-card {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    color: var(--text-color);
+  }
+
+  .project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
+  }
+
+  .project-icon {
+    margin-right: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .project-info h3 {
+    margin: 0 0 0.35rem 0;
+    font-size: 1.15rem;
+  }
+
+  .project-info p {
+    margin: 0;
+    color: var(--motto-text-color);
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 768px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .container {
+      padding: 1rem;
+    }
+  }
+</style>

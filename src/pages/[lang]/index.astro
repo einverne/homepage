@@ -1,0 +1,113 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Profile from '@components/Profile.astro';
+import Projects from '@components/Projects.astro';
+import TechStack from '@components/TechStack.astro';
+import RecentPosts from '@components/RecentPosts.astro';
+import LatestVideo from '@components/LatestVideo.astro';
+import { getCached } from '@utils/cache';
+import Parser from 'rss-parser';
+import { siteConfig } from '@/config';
+import {
+  getLocale,
+  getTranslations,
+  getLocaleDateLocale,
+  getLocaleStaticPaths,
+} from '@/utils/i18n';
+
+export const getStaticPaths = () => getLocaleStaticPaths('lang');
+
+const feedUrl = 'https://blog.einverne.info/feed.xml';
+const youtubeChannelId = 'UC1kIZ0vzocCOpoZqCq3fhCQ';
+const youtubeChannelUrl = `https://www.youtube.com/channel/${youtubeChannelId}`;
+const youtubeFeedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${youtubeChannelId}`;
+const parser = new Parser();
+const cacheTtlMs = siteConfig.cache?.ttlMs ?? 24 * 60 * 60 * 1000;
+const locale = getLocale(Astro.currentLocale);
+const t = getTranslations(locale);
+const dateLocale = getLocaleDateLocale(locale);
+
+const posts = await getCached('rss:recent-posts', cacheTtlMs, async () => {
+  const response = await fetch(feedUrl);
+  const xml = await response.text();
+  const feed = await parser.parseString(xml);
+  return (feed.items || []).slice(0, 5).map((item) => ({
+    title: item.title ?? t.common.untitledPost,
+    link: item.link ?? feedUrl,
+    date: item.pubDate ? new Date(item.pubDate).toLocaleDateString(dateLocale) : '',
+  }));
+}).catch(() => []);
+
+const latestVideos = await getCached('youtube:latest-videos', cacheTtlMs, async () => {
+  const youtubeResponse = await fetch(youtubeFeedUrl);
+  const youtubeXml = await youtubeResponse.text();
+  const youtubeFeed = await parser.parseString(youtubeXml);
+  return (youtubeFeed.items || []).slice(0, 5).map((item) => ({
+    title: item.title ?? t.common.untitledVideo,
+    link: item.link ?? youtubeChannelUrl,
+    date: item.pubDate ? new Date(item.pubDate).toLocaleDateString(dateLocale) : '',
+    thumbnail: item.enclosure?.url ?? item['media:thumbnail']?.url ?? '',
+  }));
+}).catch(() => []);
+
+---
+
+<Layout title={t.common.homeTitle}>
+  <div class="page-stack">
+    <Profile />
+
+    <div class="middle-section">
+      <Projects />
+      <TechStack />
+    </div>
+
+    <div class="bottom-section">
+      <RecentPosts posts={posts} />
+      <LatestVideo videos={latestVideos} channelUrl={youtubeChannelUrl} />
+    </div>
+  </div>
+</Layout>
+
+<style>
+.page-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.middle-section {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 6vh 8vw 3vh;
+  flex-wrap: wrap;
+}
+
+.middle-section > :global(*) {
+  flex: 1 1 0;
+  min-width: 300px;
+}
+
+.bottom-section {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 3vh 8vw 6vh;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .middle-section {
+    flex-direction: column;
+    padding: 5vh 8vw 3vh;
+    gap: 16px;
+  }
+
+  .bottom-section {
+    flex-direction: column;
+    padding: 3vh 8vw 6vh;
+    gap: 16px;
+  }
+}
+</style>

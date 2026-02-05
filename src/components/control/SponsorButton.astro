@@ -1,0 +1,424 @@
+---
+import { getLocale, getTranslations } from '@/utils/i18n';
+
+const locale = getLocale(Astro.currentLocale);
+const t = getTranslations(locale);
+
+const githubSponsorUrl = 'https://github.com/sponsors/einverne';
+const buyMeACoffeeUrl = 'https://buymeacoffee.com/einverne';
+const usdtAddress = 'TN3dLzMf8gRr7gfkLdTsLWwcav29TZtpHY';
+---
+
+<button
+  id="sponsor-toggle"
+  class="sponsor-toggle"
+  type="button"
+  aria-haspopup="dialog"
+  aria-controls="sponsor-modal"
+  aria-expanded="false"
+>
+  <span class="sponsor-icon" aria-hidden="true">❤</span>
+  <span class="sponsor-label">{t.common.sponsorButton}</span>
+</button>
+
+<div
+  id="sponsor-modal"
+  class="sponsor-modal sponsor-hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="sponsor-title"
+  aria-hidden="true"
+>
+  <div class="sponsor-card" role="document">
+    <div class="sponsor-header">
+      <h2 id="sponsor-title">{t.common.sponsorTitle}</h2>
+      <button id="sponsor-close" class="sponsor-close" type="button" aria-label={t.common.sponsorClose}>
+        ×
+      </button>
+    </div>
+
+    <p class="sponsor-intro">{t.common.sponsorIntro}</p>
+
+    <ul class="sponsor-list">
+      <li class="sponsor-item">
+        <span class="sponsor-dot">𝕏</span>
+        <span>
+          {t.common.sponsorXPrefix && (
+            <span class="sponsor-like-prefix">{t.common.sponsorXPrefix}</span>
+          )}
+          <a href="https://x.com/einverne" target="_blank" rel="noreferrer noopener">X</a>
+          {t.common.sponsorXSuffix && (
+            <span class="sponsor-like-suffix">{t.common.sponsorXSuffix}</span>
+          )}
+        </span>
+      </li>
+      <li class="sponsor-item">
+        <span class="sponsor-dot">👍</span>
+        <span>
+          {t.common.sponsorLikePrefix && (
+            <span class="sponsor-like-prefix">{t.common.sponsorLikePrefix}</span>
+          )}
+          <a href="https://www.youtube.com/@einverne" target="_blank" rel="noreferrer noopener">YouTube</a>
+          /
+          <a href="https://space.bilibili.com/4849599/" target="_blank" rel="noreferrer noopener">Bilibili</a>
+          {t.common.sponsorLikeSuffix && (
+            <span class="sponsor-like-suffix">{t.common.sponsorLikeSuffix}</span>
+          )}
+        </span>
+      </li>
+      <li class="sponsor-item">
+        <span class="sponsor-dot">⭐</span>
+        <span>
+          {t.common.sponsorGithub}
+          <a href={githubSponsorUrl} target="_blank" rel="noreferrer noopener">
+            {githubSponsorUrl}
+          </a>
+        </span>
+      </li>
+      <li class="sponsor-item">
+        <span class="sponsor-dot">☕</span>
+        <span>
+          {t.common.sponsorCoffee}
+          <a href={buyMeACoffeeUrl} target="_blank" rel="noreferrer noopener">
+            {buyMeACoffeeUrl}
+          </a>
+        </span>
+      </li>
+    </ul>
+
+    <div class="sponsor-usdt">
+      <div class="sponsor-usdt-title">{t.common.sponsorUsdtTitle}</div>
+      <p class="sponsor-usdt-hint">{t.common.sponsorUsdtHint}</p>
+      <div class="sponsor-address-row">
+        <code id="sponsor-address" class="sponsor-address">{usdtAddress}</code>
+        <button
+          id="sponsor-copy"
+          class="sponsor-copy"
+          type="button"
+          data-copy-text={t.common.sponsorCopy}
+          data-copied-text={t.common.sponsorCopied}
+        >
+          {t.common.sponsorCopy}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sponsor-toggle {
+    position: fixed;
+    right: 5vw;
+    bottom: 4vh;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 16px;
+    height: 44px;
+    border-radius: 999px;
+    border: none;
+    background: var(--link-color);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    opacity: 0.95;
+  }
+
+  .sponsor-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.18);
+  }
+
+  .sponsor-icon {
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .sponsor-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 99998;
+    padding: 20px;
+  }
+
+  .sponsor-hidden {
+    display: none;
+  }
+
+  .sponsor-card {
+    width: min(92vw, 560px);
+    background: var(--color-content-bg);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 20px 40px var(--color-shadow);
+    color: var(--text-color);
+  }
+
+  .sponsor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .sponsor-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+  }
+
+  .sponsor-close {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.06);
+    color: inherit;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .sponsor-close:hover {
+    background: rgba(0, 0, 0, 0.12);
+    transform: scale(1.05);
+  }
+
+  .sponsor-intro {
+    margin: 0 0 16px;
+    color: var(--motto-text-color);
+  }
+
+  .sponsor-list {
+    list-style: none;
+    margin: 0 0 18px;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+
+  .sponsor-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .sponsor-item a {
+    margin-left: 6px;
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: 600;
+    word-break: break-all;
+  }
+
+  .sponsor-item a:hover {
+    text-decoration: underline;
+  }
+
+  .sponsor-like-prefix {
+    margin-right: 6px;
+  }
+
+  .sponsor-like-suffix {
+    margin-left: 6px;
+  }
+
+  .sponsor-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.06);
+    flex-shrink: 0;
+  }
+
+  .sponsor-usdt {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    padding-top: 16px;
+  }
+
+  .sponsor-usdt-title {
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .sponsor-usdt-hint {
+    margin: 0 0 12px;
+    color: var(--motto-text-color);
+    line-height: 1.5;
+  }
+
+  .sponsor-address-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .sponsor-address {
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.06);
+    font-size: 0.9rem;
+    word-break: break-all;
+  }
+
+  .sponsor-copy {
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: none;
+    background: var(--link-color);
+    color: #fff;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .sponsor-copy[data-copied="true"] {
+    background: #22c55e;
+  }
+
+  .sponsor-copy:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  @media (max-width: 520px) {
+    .sponsor-toggle {
+      right: 16px;
+      bottom: 16px;
+    }
+
+    .sponsor-card {
+      padding: 22px;
+    }
+  }
+</style>
+
+<script is:inline>
+  function initSponsorModal() {
+    const toggle = document.getElementById('sponsor-toggle');
+    const modal = document.getElementById('sponsor-modal');
+    const closeBtn = document.getElementById('sponsor-close');
+    const copyBtn = document.getElementById('sponsor-copy');
+    const addressEl = document.getElementById('sponsor-address');
+
+    if (!toggle || !modal) return;
+
+    const copyText = copyBtn?.dataset.copyText || 'Copy';
+    const copiedText = copyBtn?.dataset.copiedText || 'Copied';
+
+    let previousOverflow = '';
+
+    const openModal = () => {
+      previousOverflow = document.body.style.overflow;
+      modal.classList.remove('sponsor-hidden');
+      modal.setAttribute('aria-hidden', 'false');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      closeBtn?.focus();
+    };
+
+    const closeModal = () => {
+      modal.classList.add('sponsor-hidden');
+      modal.setAttribute('aria-hidden', 'true');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = previousOverflow;
+    };
+
+    const handleOverlayClick = (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    };
+
+    const handleEsc = (event) => {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    };
+
+    const handleCopy = async () => {
+      if (!addressEl) return;
+      const addressText = addressEl.textContent?.trim() || '';
+      if (!addressText) return;
+
+      let copied = false;
+
+      if (navigator.clipboard?.writeText) {
+        try {
+          await navigator.clipboard.writeText(addressText);
+          copied = true;
+        } catch (error) {
+          copied = false;
+        }
+      }
+
+      if (!copied) {
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(addressEl);
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+        try {
+          copied = document.execCommand('copy');
+        } catch (error) {
+          copied = false;
+        }
+        selection?.removeAllRanges();
+      }
+
+      if (copyBtn) {
+        copyBtn.textContent = copied ? copiedText : copyText;
+        copyBtn.dataset.copied = copied ? 'true' : 'false';
+        if (copied) {
+          window.setTimeout(() => {
+            copyBtn.textContent = copyText;
+            copyBtn.dataset.copied = 'false';
+          }, 2000);
+        }
+      }
+    };
+
+    if (window.sponsorModalHandlers) {
+      const handlers = window.sponsorModalHandlers;
+      toggle.removeEventListener('click', handlers.openModal);
+      closeBtn?.removeEventListener('click', handlers.closeModal);
+      modal.removeEventListener('click', handlers.handleOverlayClick);
+      document.removeEventListener('keydown', handlers.handleEsc);
+      copyBtn?.removeEventListener('click', handlers.handleCopy);
+    }
+
+    window.sponsorModalHandlers = {
+      openModal,
+      closeModal,
+      handleOverlayClick,
+      handleEsc,
+      handleCopy,
+    };
+
+    toggle.addEventListener('click', openModal);
+    closeBtn?.addEventListener('click', closeModal);
+    modal.addEventListener('click', handleOverlayClick);
+    document.addEventListener('keydown', handleEsc);
+    copyBtn?.addEventListener('click', handleCopy);
+  }
+
+  document.addEventListener('astro:page-load', initSponsorModal);
+  document.addEventListener('astro:after-swap', initSponsorModal);
+</script>

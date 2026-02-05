@@ -1,0 +1,240 @@
+---
+import { getLocale, getTranslations } from '@/utils/i18n';
+
+const locale = getLocale(Astro.currentLocale);
+const t = getTranslations(locale);
+
+// Map tech names to Skill Icons identifiers
+const techIconMap: Record<string, string> = {
+  // Frontend
+  'React': 'react',
+  'Next.js': 'nextjs',
+  'Flutter': 'flutter',
+  'Astro': 'astro',
+  'Gatsby': 'gatsby',
+  'Bootstrap': 'bootstrap',
+  'HTML': 'html',
+
+  // Backend
+  'Python': 'python',
+  'Flask': 'flask',
+  'FastAPI': 'fastapi',
+  'Hono': 'hono',
+  'Node.js': 'nodejs',
+  'Java': 'java',
+  'Kotlin': 'kotlin',
+  'Spring': 'spring',
+  'Laravel': 'laravel',
+  'Dart': 'dart',
+
+  // Database
+  'PostgreSQL': 'postgresql',
+  'MySQL': 'mysql',
+  'SQLite': 'sqlite',
+  'Redis': 'redis',
+  'Prisma': 'prisma',
+
+  // Cloud & Infrastructure
+  'Cloudflare': 'cloudflare',
+  'Azure': 'azure',
+  'Netlify': 'netlify',
+  'Vercel': 'vercel',
+  'Kubernetes': 'kubernetes',
+  'K3s': 'kubernetes',
+  'Docker': 'docker',
+  'Nginx': 'nginx',
+  'Appwrite': 'appwrite',
+
+  // DevOps & Tools
+  'Git': 'git',
+  'GitHub': 'github',
+  'GitLab': 'gitlab',
+  'Ansible': 'ansible',
+  'Bash': 'bash',
+  'Linux': 'linux',
+  'Ubuntu': 'ubuntu',
+  'Maven': 'maven',
+  'Yarn': 'yarn',
+  'Bun': 'bun',
+  'Grafana': 'grafana',
+  'Sentry': 'sentry',
+
+  // Editors & IDEs
+  'Vim': 'vim',
+  'Obsidian': 'obsidian',
+  'IntelliJ IDEA': 'idea',
+
+  // Social & Other
+  'Mastodon': 'mastodon',
+  'WordPress': 'wordpress',
+  'Markdown': 'md',
+};
+
+const techCategories = [
+  {
+    name: t.techStack.frontend,
+    techs: ['React', 'Next.js', 'Astro', 'Flutter', 'Gatsby', 'Bootstrap', 'HTML'],
+  },
+  {
+    name: t.techStack.backend,
+    techs: ['Python', 'Flask', 'FastAPI', 'Java', 'Kotlin', 'Spring', 'Node.js', 'Laravel'],
+  },
+  {
+    name: t.techStack.database,
+    techs: ['PostgreSQL', 'MySQL', 'Redis', 'SQLite', 'Prisma'],
+  },
+  {
+    name: t.techStack.cloud,
+    techs: ['Cloudflare', 'Azure', 'Netlify', 'Vercel', 'Kubernetes', 'Docker', 'Nginx'],
+  },
+  {
+    name: t.techStack.devops,
+    techs: ['Git', 'GitHub', 'GitLab', 'Ansible', 'Bash', 'Linux', 'Maven', 'Grafana', 'Sentry'],
+  },
+  {
+    name: t.techStack.editors,
+    techs: ['Vim', 'Obsidian', 'IntelliJ IDEA'],
+  },
+];
+
+const allTechs = techCategories.flatMap(cat => cat.techs);
+---
+
+<section class="tech-stack">
+  <div class="header">
+    <h2>{t.techStack.title}</h2>
+  </div>
+
+  <div class="tech-categories">
+    {techCategories.map((category) => (
+      <div class="category">
+        <h3 class="category-name">{category.name}</h3>
+        <div class="tech-tags">
+          {category.techs.map((tech) => {
+            const iconId = techIconMap[tech] || tech.toLowerCase();
+            return (
+              <div class="tech-tag">
+                <img
+                  src={`https://skillicons.dev/icons?i=${iconId}`}
+                  alt={tech}
+                  class="tech-icon"
+                  loading="lazy"
+                />
+                <span class="tech-name">{tech}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    ))}
+  </div>
+
+</section>
+
+<style>
+.tech-stack {
+  background: var(--color-content-bg);
+  border: 1px solid color-mix(in srgb, var(--border-color) 45%, transparent);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 24px var(--color-shadow);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header {
+  margin-bottom: 16px;
+}
+
+.header h2 {
+  font-size: 1.3rem;
+  margin: 0;
+  background: linear-gradient(135deg, var(--link-color), color-mix(in srgb, var(--link-color) 70%, #9333ea));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tech-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.category {
+  border-radius: 8px;
+}
+
+.category-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: var(--motto-text-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tech-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  background: color-mix(in srgb, var(--border-color) 8%, transparent);
+  color: var(--text-color);
+  border-radius: 6px;
+  font-weight: 500;
+  border: 1px solid color-mix(in srgb, var(--border-color) 25%, transparent);
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.tech-tag:hover {
+  background: color-mix(in srgb, var(--link-color) 10%, transparent);
+  border-color: color-mix(in srgb, var(--link-color) 35%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--link-color) 10%, transparent);
+}
+
+.tech-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.tech-name {
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .tech-stack {
+    padding: 18px;
+  }
+
+  .tech-categories {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .tech-tags {
+    gap: 5px;
+  }
+
+  .tech-tag {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+
+  .tech-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+</style>

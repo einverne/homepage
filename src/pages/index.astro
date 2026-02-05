@@ -1,0 +1,58 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import {
+  supportedLocales,
+  localeLabels,
+  localeCodes,
+  getLocale,
+} from '@/utils/i18n';
+
+const defaultLocale = getLocale();
+const localeUrls = Object.fromEntries(
+  supportedLocales.map((locale) => [locale, getRelativeLocaleUrl(locale, '')])
+);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirecting...</title>
+  </head>
+  <body>
+    <noscript>
+      <p>Please choose your language:</p>
+      <ul>
+        {supportedLocales.map((locale) => (
+          <li><a href={localeUrls[locale]}>{localeLabels[locale]}</a></li>
+        ))}
+      </ul>
+    </noscript>
+    <script is:inline define:vars={{ localeUrls, localeCodes, defaultLocale }}>
+      const preferred = navigator.languages && navigator.languages.length
+        ? navigator.languages
+        : [navigator.language];
+
+      const normalize = (value) => String(value || '').toLowerCase();
+      const matchLocale = (code) => {
+        const normalized = normalize(code);
+        const base = normalized.split('-')[0];
+        return Object.keys(localeCodes).find((locale) => {
+          const codes = localeCodes[locale].map(normalize);
+          return codes.includes(normalized) || codes.includes(base);
+        });
+      };
+
+      let resolvedLocale = defaultLocale;
+      for (const code of preferred) {
+        const match = matchLocale(code);
+        if (match) {
+          resolvedLocale = match;
+          break;
+        }
+      }
+
+      window.location.replace(localeUrls[resolvedLocale] || localeUrls[defaultLocale]);
+    </script>
+  </body>
+</html>
