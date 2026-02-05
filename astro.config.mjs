@@ -7,6 +7,9 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://einverne.info',
+  devToolbar: {
+    placement: 'bottom-right',
+  },
   i18n: {
     locales: [
       {
