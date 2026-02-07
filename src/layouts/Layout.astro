@@ -27,6 +27,22 @@ const localeLangTag = getLocaleLangTag(Astro.currentLocale);
     <title>{pageTitle}</title>
     <ClientRouter />
     <script defer src="https://u.einverne.info/my.js" data-website-id="b8fad9f7-dd19-451e-b8d7-54b2525b2fbf"></script>
+    <script>
+      (function(d,t) {
+        var BASE_URL="https://chat.einverne.info";
+        var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=BASE_URL+"/packs/js/sdk.js";
+        g.defer = true;
+        g.async = true;
+        s.parentNode.insertBefore(g,s);
+        g.onload=function(){
+          window.chatwootSDK.run({
+            websiteToken: '8CwLQu4uDB5KoLGmPanzudWh',
+            baseUrl: BASE_URL
+          })
+        }
+      })(document,"script");
+    </script>
 </head>
 <body class="layout-body">
     { siteConfig.mirrorSite?.enabled && <SiteNavi /> }
@@ -181,4 +197,25 @@ body::after {
         linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
     opacity: 0.22;
     mix-blend-mode: screen;
+}
+
+/* Chatwoot 聊天窗口位置调整，放在 Sponsor 按钮上方 */
+.woot-widget-bubble,
+.woot--bubble-holder {
+    right: 5vw !important;
+    bottom: calc(4vh + 56px) !important;
+}
+
+@media (max-width: 520px) {
+    .woot-widget-bubble,
+    .woot--bubble-holder {
+        right: 16px !important;
+        bottom: 72px !important;
+    }
+}
+
+.woot-widget-bubble,
+.woot--bubble-holder,
+#chatwoot_live_chat_widget {
+    z-index: 999 !important;
 }

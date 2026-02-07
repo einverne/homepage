@@ -126,57 +126,121 @@ export const profileConfig: ProfileConfig = {
 export const labConfig: LabConfig = [
     // Icon and color rules are same as profileConfig
     {
-        name: "Compound Interest Calculator",
-        description: "复利计算器 - 见证时间与复利的力量",
+        name: {
+            zh: "复利计算器",
+            en: "Compound Interest Calculator",
+            ja: "複利計算機",
+        },
+        description: {
+            zh: "复利计算器 - 见证时间与复利的力量",
+            en: "Compound interest calculator - see the power of time and compounding",
+            ja: "複利計算機 - 時間と複利の力を実感",
+        },
         url: "/zh/tools/compound-interest",
         icon: "fa6-solid:calculator",
         color: "#10b981"
     },
     {
-        name: "EV Hosting",
-        description: "A hosting service for my projects",
+        name: {
+            zh: "EV 托管",
+            en: "EV Hosting",
+            ja: "EV ホスティング",
+        },
+        description: {
+            zh: "我的项目托管服务",
+            en: "A hosting service for my projects",
+            ja: "プロジェクト向けのホスティングサービス",
+        },
         url: "https://client.einverne.info",
         icon: "fa6-solid:server",
         color: "#9fa1a1ff"
     },
     {
-        name: "EV API",
-        description: "A LLM API Proxy",
+        name: {
+            zh: "EV API",
+            en: "EV API",
+            ja: "EV API",
+        },
+        description: {
+            zh: "LLM API 代理",
+            en: "A LLM API Proxy",
+            ja: "LLM API プロキシ",
+        },
         url: "https://api.einverne.info",
         icon: "fa6-solid:robot",
         color: "#9fa1a1ff"
     },
     {
-        name: "EV Invest",
-        description: "Investment",
+        name: {
+            zh: "EV 投资",
+            en: "EV Invest",
+            ja: "EV 投資",
+        },
+        description: {
+            zh: "投资",
+            en: "Investment",
+            ja: "投資",
+        },
         url: "https://invest.einverne.info",
         icon: "fa6-solid:chart-line",
         color: "#0c8ef8ff"
     },
     {
-        name: "Server",
-        description: "A server monitor",
+        name: {
+            zh: "服务器",
+            en: "Server",
+            ja: "サーバー",
+        },
+        description: {
+            zh: "服务器监控",
+            en: "A server monitor",
+            ja: "サーバー監視",
+        },
         url: "https://nz.einverne.info",
         icon: "fa6-solid:microchip",
         color: "#50b8e9ff"
     },
     {
-        name: "Photo",
-        description: "A photo album",
+        name: {
+            zh: "相册",
+            en: "Photo",
+            ja: "写真",
+        },
+        description: {
+            zh: "相册",
+            en: "A photo album",
+            ja: "写真アルバム",
+        },
         url: "https://photo.einverne.info",
         icon: "fa6-solid:photo-film",
     },
     {
-        name: "Kuma",
-        description: "A website monitor",
+        name: {
+            zh: "Kuma",
+            en: "Kuma",
+            ja: "Kuma",
+        },
+        description: {
+            zh: "网站监控",
+            en: "A website monitor",
+            ja: "Webサイト監視",
+        },
         url: "https://kuma.einverne.info",
         icon: {
             src: "/icons/uptime-kuma.svg",
         },
     },
     {
-        name: "Umami",
-        description: "A website analytics platform",
+        name: {
+            zh: "Umami",
+            en: "Umami",
+            ja: "Umami",
+        },
+        description: {
+            zh: "网站分析平台",
+            en: "A website analytics platform",
+            ja: "Webサイト分析プラットフォーム",
+        },
         url: "https://umami.einverne.info",
         icon: {
             light: "/icons/umami.svg",
@@ -185,8 +249,16 @@ export const labConfig: LabConfig = [
         color: "#000000"
     },
     {
-        name: "Wakapi",
-        description: "Wakapi is a self-hosted productivity dashboard",
+        name: {
+            zh: "Wakapi",
+            en: "Wakapi",
+            ja: "Wakapi",
+        },
+        description: {
+            zh: "自托管的效率仪表盘",
+            en: "Wakapi is a self-hosted productivity dashboard",
+            ja: "セルフホスト型の生産性ダッシュボード",
+        },
         url: "https://wakapi.einverne.info",
         icon: {
             src: "/icons/wakapi.svg",
@@ -194,58 +266,122 @@ export const labConfig: LabConfig = [
         color: "#72b6b3",
     },
     {
-        name: "Chatwoot",
-        description: "Chatwoot customer support inbox",
+        name: {
+            zh: "Chatwoot",
+            en: "Chatwoot",
+            ja: "Chatwoot",
+        },
+        description: {
+            zh: "Chatwoot 客服收件箱",
+            en: "Chatwoot customer support inbox",
+            ja: "Chatwoot サポート受信箱",
+        },
         url: "https://chat.einverne.info",
         icon: {
             src: "/icons/chatwoot.svg",
         },
     },
     {
-        name: "Invites",
-        description: "A place for me to share invites",
+        name: {
+            zh: "邀请",
+            en: "Invites",
+            ja: "招待",
+        },
+        description: {
+            zh: "分享邀请码的地方",
+            en: "A place for me to share invites",
+            ja: "招待を共有する場所",
+        },
         url: "https://invites.einverne.info",
         icon: "fa6-solid:envelope",
         color: "#43a4d1ff"
     },
     {
-        name: "Brokers",
-        description: "A place for me to share brokers",
+        name: {
+            zh: "券商",
+            en: "Brokers",
+            ja: "ブローカー",
+        },
+        description: {
+            zh: "分享券商的平台",
+            en: "A place for me to share brokers",
+            ja: "ブローカーを共有する場所",
+        },
         url: "https://brokers.einverne.info",
         icon: "fa6-solid:money-bill",
         color: "#eb16a7ff"
     },
     {
-        name: "AI",
-        description: "A place for me to share AI tools",
+        name: {
+            zh: "AI",
+            en: "AI",
+            ja: "AI",
+        },
+        description: {
+            zh: "分享 AI 工具的地方",
+            en: "A place for me to share AI tools",
+            ja: "AI ツールを共有する場所",
+        },
         url: "https://ai.einverne.info",
         icon: "fa6-solid:robot",
         color: "#3924dbff"
     },
     {
-        name: "BiliNote",
-        description: "Transcript and translate Bilibili/YouTube videos",
+        name: {
+            zh: "BiliNote",
+            en: "BiliNote",
+            ja: "BiliNote",
+        },
+        description: {
+            zh: "转录并翻译 Bilibili/YouTube 视频",
+            en: "Transcript and translate Bilibili/YouTube videos",
+            ja: "Bilibili/YouTube 動画の文字起こしと翻訳",
+        },
         url: "https://bilinote.einverne.info",
         icon: "fa6-solid:video",
         color: "#0c8ef8ff"
     },
     {
-        name: "NomadInit",
-        description: "Nomad life",
+        name: {
+            zh: "NomadInit",
+            en: "NomadInit",
+            ja: "NomadInit",
+        },
+        description: {
+            zh: "游牧生活",
+            en: "Nomad life",
+            ja: "ノマド生活",
+        },
         url: "https://nomadinit.com",
         icon: "fa6-solid:plane",
         color: "#43a4d1ff"
     },
     {
-        name: "EV Japan Life",
-        description: "Japan life",
+        name: {
+            zh: "EV 日本生活",
+            en: "EV Japan Life",
+            ja: "EV 日本生活",
+        },
+        description: {
+            zh: "日本生活",
+            en: "Japan life",
+            ja: "日本での生活",
+        },
         url: "https://evjp.life",
         icon: "fa6-solid:house",
         color: "#43a4d1ff"
     },
     {
-        name: "Fast Note Sync",
-        description: "Fast note sync service",
+        name: {
+            zh: "Fast Note Sync",
+            en: "Fast Note Sync",
+            ja: "Fast Note Sync",
+        },
+        description: {
+            zh: "快速笔记同步服务",
+            en: "Fast note sync service",
+            ja: "高速ノート同期サービス",
+        },
         url: "https://ob.einverne.info",
         icon: "fa6-solid:bolt"
     }

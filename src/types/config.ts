@@ -38,9 +38,15 @@ export type IconSpec =
     | { src: string }
     | { light: string; dark: string };
 
+export type LocalizedText = {
+    zh: string;
+    en: string;
+    ja: string;
+}
+
 export type LabConfig = {
-    name: string;
-    description: string;
+    name: string | LocalizedText;
+    description: string | LocalizedText;
     url: string;
     icon: IconSpec;
     color?: string;
