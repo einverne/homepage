@@ -4,6 +4,7 @@ import { labConfig } from '@/config';
 import HomeIcon from '@components/control/HomeIcon.astro';
 import IconModule from '@components/misc/IconModule.astro';
 import { getTranslations, type SupportedLocale } from '@/utils/i18n';
+import type { IconSpec } from '@/types/config';
 
 export function getStaticPaths() {
   return [
@@ -17,23 +18,12 @@ interface Project {
   name: string;
   description: string;
   url: string;
-  icon: string;
+  icon: IconSpec;
   color?: string;
 }
 
 const { locale } = Astro.props;
 const t = getTranslations(locale);
-const isPublicIcon = (icon: string) => icon.startsWith('/icons/');
-
-const projects: Project[] = [
-  ...labConfig,
-  {
-    name: "Chatwoot",
-    description: "Chatwoot customer support inbox",
-    url: "https://chat.einverne.info",
-    icon: "/icons/chatwoot.svg",
-  },
-];
 
 // Helper to convert internal URLs to current locale
 const getLocalizedUrl = (url: string) => {
@@ -49,7 +39,7 @@ const getLocalizedUrl = (url: string) => {
   <div class="container">
     <h1>{t.common.labTitle}</h1>
     <div class="projects-grid">
-      {projects.map((project: Project) => (
+      {labConfig.map((project: Project) => (
         <a
           href={getLocalizedUrl(project.url)}
           {...project.url.startsWith('/')
@@ -58,17 +48,7 @@ const getLocalizedUrl = (url: string) => {
           class="project-card"
         >
           <div class="project-icon">
-            {isPublicIcon(project.icon) ? (
-              <img
-                src={project.icon}
-                alt={`${project.name} logo`}
-                width="28"
-                height="28"
-                loading="lazy"
-              />
-            ) : (
-              <IconModule icon={project.icon} size={28} color={project.color} />
-            )}
+            <IconModule icon={project.icon} size={28} color={project.color} label={`${project.name} logo`} />
           </div>
           <div class="project-info">
             <h3>{project.name}</h3>
@@ -122,12 +102,6 @@ const getLocalizedUrl = (url: string) => {
   .project-icon {
     margin-right: 0.9rem;
     flex-shrink: 0;
-  }
-
-  .project-icon img {
-    width: 28px;
-    height: 28px;
-    display: block;
   }
 
   .project-info h3 {

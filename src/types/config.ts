@@ -33,10 +33,15 @@ export type ProfileConfig = {
     }[];
 }
 
+export type IconSpec =
+    | string
+    | { src: string }
+    | { light: string; dark: string };
+
 export type LabConfig = {
     name: string;
     description: string;
     url: string;
-    icon: string;
+    icon: IconSpec;
     color?: string;
 }[]

@@ -1,22 +1,29 @@
 ---
 import path from "path";
 import { Icon } from "astro-icon/components";
+import type { IconSpec } from "@/types/config";
 
 interface Props {
-    icon: string;
+    icon: IconSpec;
     size?: number;
     color?: string;
+    label?: string;
 }
 
-const { icon, size, color } = Astro.props;
+const { icon, size, color, label } = Astro.props;
+const iconSize = size || 25;
 
-// 如果 icon 以.svg 结尾，则直接使用 icon
-const isLocal = icon.endsWith(".svg");
+const isObject = typeof icon === "object" && icon !== null;
+const isVariant = isObject && "light" in icon && "dark" in icon;
+const isSrcObject = isObject && "src" in icon;
+const iconString = typeof icon === "string" ? icon : isSrcObject ? icon.src : "";
+const isPublicIcon = typeof iconString === "string" && iconString.startsWith("/icons/");
+const isLocalSvg = typeof iconString === "string" && iconString.endsWith(".svg") && !isPublicIcon;
 
 let SvgComponent;
-if (isLocal) {
+if (isLocalSvg) {
     const svgs = import.meta.glob("../../**/*.svg");
-    let svgPath = path.normalize(path.join("../../", "/", icon)).replace(/\\/g, "/");
+    let svgPath = path.normalize(path.join("../../", "/", iconString)).replace(/\\/g, "/");
     const svgModule = svgs[svgPath];
     if (!svgModule) {
         console.error(`\n[ERROR] [IconModule] ${icon} not found`);
@@ -28,9 +35,67 @@ if (isLocal) {
 }
 ---
 
-{isLocal && SvgComponent && 
-  <SvgComponent width={size} height={size} fill={color} />
-}
-{!isLocal &&
-  <Icon name={icon} size={size || 25} style={`color: ${color}`} />
-}
+{isVariant && (
+  <span class="icon-variant" aria-label={label}>
+    <img
+      src={icon.light}
+      alt={label || ""}
+      width={iconSize}
+      height={iconSize}
+      loading="lazy"
+      class="icon-image icon-light"
+    />
+    <img
+      src={icon.dark}
+      alt={label || ""}
+      width={iconSize}
+      height={iconSize}
+      loading="lazy"
+      class="icon-image icon-dark"
+    />
+  </span>
+)}
+{!isVariant && isSrcObject && (
+  <img
+    src={icon.src}
+    alt={label || ""}
+    width={iconSize}
+    height={iconSize}
+    loading="lazy"
+    class="icon-image icon-single"
+  />
+)}
+{!isVariant && !isSrcObject && isPublicIcon && (
+  <img
+    src={iconString}
+    alt={label || ""}
+    width={iconSize}
+    height={iconSize}
+    loading="lazy"
+    class="icon-image icon-single"
+  />
+)}
+{!isVariant && !isSrcObject && !isPublicIcon && isLocalSvg && SvgComponent && (
+  <SvgComponent width={iconSize} height={iconSize} fill={color} />
+)}
+{!isVariant && !isSrcObject && !isPublicIcon && !isLocalSvg && (
+  <Icon name={iconString} size={iconSize} style={`color: ${color}`} />
+)}
+
+<style>
+  .icon-image {
+    display: block;
+  }
+
+  .icon-image.icon-dark {
+    display: none;
+  }
+
+  html[data-theme="dark"] .icon-image.icon-light {
+    display: none;
+  }
+
+  html[data-theme="dark"] .icon-image.icon-dark {
+    display: block;
+  }
+</style>

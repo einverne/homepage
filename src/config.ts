@@ -170,21 +170,36 @@ export const labConfig: LabConfig = [
         name: "Kuma",
         description: "A website monitor",
         url: "https://kuma.einverne.info",
-        icon: "fa6-solid:heart-pulse",
+        icon: {
+            src: "/icons/uptime-kuma.svg",
+        },
     },
     {
         name: "Umami",
         description: "A website analytics platform",
         url: "https://umami.einverne.info",
-        icon: "simple-icons:umami",
+        icon: {
+            light: "/icons/umami.svg",
+            dark: "/icons/umami-light.svg",
+        },
         color: "#000000"
     },
     {
         name: "Wakapi",
         description: "Wakapi is a self-hosted productivity dashboard",
         url: "https://wakapi.einverne.info",
-        icon: "fa6-solid:bookmark",
+        icon: {
+            src: "/icons/wakapi.svg",
+        },
         color: "#72b6b3",
+    },
+    {
+        name: "Chatwoot",
+        description: "Chatwoot customer support inbox",
+        url: "https://chat.einverne.info",
+        icon: {
+            src: "/icons/chatwoot.svg",
+        },
     },
     {
         name: "Invites",
