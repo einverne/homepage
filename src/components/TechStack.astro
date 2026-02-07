@@ -13,15 +13,18 @@ const skillIconVariants = (name: string): IconEntry => ({
   dark: `skill-icons:${name}-dark`,
 });
 const simpleIcon = (name: string) => `simple-icons:${name}`;
+const deviconIcon = (name: string) => `devicon:${name}`;
 
 // Map tech names to local Iconify identifiers or custom assets
 const techIconMap: Record<string, IconEntry> = {
   // Frontend
   'React': skillIconVariants('react'),
   'Next.js': skillIconVariants('nextjs'),
+  'Android Studio': skillIconVariants('androidstudio'),
   'Flutter': skillIconVariants('flutter'),
   'Astro': skillIcon('astro'),
   'Gatsby': skillIcon('gatsby'),
+  'Jekyll': deviconIcon('jekyll'),
   'Bootstrap': skillIcon('bootstrap'),
   'HTML': skillIcon('html'),
 
@@ -35,11 +38,13 @@ const techIconMap: Record<string, IconEntry> = {
   'Kotlin': skillIconVariants('kotlin'),
   'Spring': skillIconVariants('spring'),
   'Laravel': skillIconVariants('laravel'),
+  'SQLAlchemy': deviconIcon('sqlalchemy'),
   'Dart': skillIconVariants('dart'),
 
   // Database
   'PostgreSQL': skillIconVariants('postgresql'),
   'MySQL': skillIconVariants('mysql'),
+  'MariaDB': deviconIcon('mariadb'),
   'SQLite': skillIcon('sqlite'),
   'Redis': skillIconVariants('redis'),
   'Prisma': skillIcon('prisma'),
@@ -50,10 +55,13 @@ const techIconMap: Record<string, IconEntry> = {
   'Netlify': skillIconVariants('netlify'),
   'Vercel': skillIconVariants('vercel'),
   'Kubernetes': skillIcon('kubernetes'),
-  'K3s': skillIcon('kubernetes'),
+  'K3s': deviconIcon('k3s'),
   'Docker': skillIcon('docker'),
+  'Helm': deviconIcon('helm'),
   'Nginx': skillIcon('nginx'),
   'Appwrite': skillIcon('appwrite'),
+  'Portainer': deviconIcon('portainer'),
+  'Proxmox': deviconIcon('proxmox'),
   'Rancher': { src: '/icons/rancher.svg' },
 
   // DevOps & Tools
@@ -64,17 +72,22 @@ const techIconMap: Record<string, IconEntry> = {
   'Terraform': skillIconVariants('terraform'),
   'Bash': skillIconVariants('bash'),
   'Linux': skillIconVariants('linux'),
+  'Linux Mint': deviconIcon('linuxmint'),
   'Ubuntu': skillIconVariants('ubuntu'),
+  'Apple': skillIconVariants('apple'),
   'Maven': skillIconVariants('maven'),
   'Yarn': skillIconVariants('yarn'),
   'Bun': skillIconVariants('bun'),
+  'tmux': deviconIcon('tmux'),
+  'Zsh': deviconIcon('zsh'),
+  'Postman': skillIcon('postman'),
   'Grafana': skillIconVariants('grafana'),
   'Sentry': skillIcon('sentry'),
 
   // Editors & IDEs
   'Vim': skillIconVariants('vim'),
   'Obsidian': skillIconVariants('obsidian'),
-  'IntelliJ IDEA': skillIconVariants('idea'),
+  'IntelliJ': deviconIcon('intellij'),
 
   // Social & Other
   'Mastodon': skillIconVariants('mastodon'),
@@ -85,27 +98,27 @@ const techIconMap: Record<string, IconEntry> = {
 const techCategories = [
   {
     name: t.techStack.frontend,
-    techs: ['React', 'Next.js', 'Astro', 'Flutter', 'Gatsby', 'Bootstrap', 'HTML'],
+    techs: ['React', 'Next.js', 'Astro', 'Gatsby', 'Jekyll', 'Flutter', 'Bootstrap', 'HTML'],
   },
   {
     name: t.techStack.backend,
-    techs: ['Python', 'Flask', 'FastAPI', 'Java', 'Kotlin', 'Spring', 'Node.js', 'Laravel'],
+    techs: ['Python', 'Flask', 'FastAPI', 'Java', 'Kotlin', 'Spring', 'Node.js', 'Laravel', 'WordPress', 'SQLAlchemy', 'Dart'],
   },
   {
     name: t.techStack.database,
-    techs: ['PostgreSQL', 'MySQL', 'Redis', 'SQLite', 'Prisma'],
+    techs: ['PostgreSQL', 'MySQL', 'MariaDB', 'Redis', 'SQLite', 'Prisma'],
   },
   {
     name: t.techStack.cloud,
-    techs: ['Cloudflare', 'Azure', 'Netlify', 'Vercel', 'Kubernetes', 'Rancher', 'Docker', 'Nginx'],
+    techs: ['Cloudflare', 'Azure', 'Netlify', 'Vercel', 'Kubernetes', 'K3s', 'Helm', 'Rancher', 'Docker', 'Nginx', 'Appwrite', 'Portainer', 'Proxmox'],
   },
   {
     name: t.techStack.devops,
-    techs: ['Git', 'GitHub', 'GitLab', 'Ansible', 'Terraform', 'Bash', 'Linux', 'Maven', 'Grafana', 'Sentry'],
+    techs: ['Git', 'GitHub', 'GitLab', 'Ansible', 'Terraform', 'Bash', 'Zsh', 'tmux', 'Linux', 'Linux Mint', 'Ubuntu', 'Apple', 'Maven', 'Postman', 'Grafana', 'Sentry'],
   },
   {
     name: t.techStack.editors,
-    techs: ['Vim', 'Obsidian', 'IntelliJ IDEA'],
+    techs: ['Vim', 'Obsidian', 'IntelliJ', 'Android Studio'],
   },
 ];
 
@@ -183,8 +196,8 @@ const getTechIconEntry = (tech: string): IconEntry => {
 }
 
 .tech-categories {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 }
 
