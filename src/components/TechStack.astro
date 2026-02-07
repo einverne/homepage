@@ -1,74 +1,85 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { getLocale, getTranslations } from '@/utils/i18n';
 
 const locale = getLocale(Astro.currentLocale);
 const t = getTranslations(locale);
 
-// Map tech names to Skill Icons identifiers
-const techIconMap: Record<string, string> = {
+type IconEntry = string | { light: string; dark: string } | { src: string };
+
+const skillIcon = (name: string) => `skill-icons:${name}`;
+const skillIconVariants = (name: string): IconEntry => ({
+  light: `skill-icons:${name}-light`,
+  dark: `skill-icons:${name}-dark`,
+});
+const simpleIcon = (name: string) => `simple-icons:${name}`;
+
+// Map tech names to local Iconify identifiers or custom assets
+const techIconMap: Record<string, IconEntry> = {
   // Frontend
-  'React': 'react',
-  'Next.js': 'nextjs',
-  'Flutter': 'flutter',
-  'Astro': 'astro',
-  'Gatsby': 'gatsby',
-  'Bootstrap': 'bootstrap',
-  'HTML': 'html',
+  'React': skillIconVariants('react'),
+  'Next.js': skillIconVariants('nextjs'),
+  'Flutter': skillIconVariants('flutter'),
+  'Astro': skillIcon('astro'),
+  'Gatsby': skillIcon('gatsby'),
+  'Bootstrap': skillIcon('bootstrap'),
+  'HTML': skillIcon('html'),
 
   // Backend
-  'Python': 'python',
-  'Flask': 'flask',
-  'FastAPI': 'fastapi',
-  'Hono': 'hono',
-  'Node.js': 'nodejs',
-  'Java': 'java',
-  'Kotlin': 'kotlin',
-  'Spring': 'spring',
-  'Laravel': 'laravel',
-  'Dart': 'dart',
+  'Python': skillIconVariants('python'),
+  'Flask': skillIconVariants('flask'),
+  'FastAPI': skillIcon('fastapi'),
+  'Hono': simpleIcon('hono'),
+  'Node.js': skillIconVariants('nodejs'),
+  'Java': skillIconVariants('java'),
+  'Kotlin': skillIconVariants('kotlin'),
+  'Spring': skillIconVariants('spring'),
+  'Laravel': skillIconVariants('laravel'),
+  'Dart': skillIconVariants('dart'),
 
   // Database
-  'PostgreSQL': 'postgresql',
-  'MySQL': 'mysql',
-  'SQLite': 'sqlite',
-  'Redis': 'redis',
-  'Prisma': 'prisma',
+  'PostgreSQL': skillIconVariants('postgresql'),
+  'MySQL': skillIconVariants('mysql'),
+  'SQLite': skillIcon('sqlite'),
+  'Redis': skillIconVariants('redis'),
+  'Prisma': skillIcon('prisma'),
 
   // Cloud & Infrastructure
-  'Cloudflare': 'cloudflare',
-  'Azure': 'azure',
-  'Netlify': 'netlify',
-  'Vercel': 'vercel',
-  'Kubernetes': 'kubernetes',
-  'K3s': 'kubernetes',
-  'Docker': 'docker',
-  'Nginx': 'nginx',
-  'Appwrite': 'appwrite',
+  'Cloudflare': skillIconVariants('cloudflare'),
+  'Azure': skillIconVariants('azure'),
+  'Netlify': skillIconVariants('netlify'),
+  'Vercel': skillIconVariants('vercel'),
+  'Kubernetes': skillIcon('kubernetes'),
+  'K3s': skillIcon('kubernetes'),
+  'Docker': skillIcon('docker'),
+  'Nginx': skillIcon('nginx'),
+  'Appwrite': skillIcon('appwrite'),
+  'Rancher': { src: '/icons/rancher.svg' },
 
   // DevOps & Tools
-  'Git': 'git',
-  'GitHub': 'github',
-  'GitLab': 'gitlab',
-  'Ansible': 'ansible',
-  'Terraform': 'terraform',
-  'Bash': 'bash',
-  'Linux': 'linux',
-  'Ubuntu': 'ubuntu',
-  'Maven': 'maven',
-  'Yarn': 'yarn',
-  'Bun': 'bun',
-  'Grafana': 'grafana',
-  'Sentry': 'sentry',
+  'Git': skillIcon('git'),
+  'GitHub': skillIconVariants('github'),
+  'GitLab': skillIconVariants('gitlab'),
+  'Ansible': skillIcon('ansible'),
+  'Terraform': skillIconVariants('terraform'),
+  'Bash': skillIconVariants('bash'),
+  'Linux': skillIconVariants('linux'),
+  'Ubuntu': skillIconVariants('ubuntu'),
+  'Maven': skillIconVariants('maven'),
+  'Yarn': skillIconVariants('yarn'),
+  'Bun': skillIconVariants('bun'),
+  'Grafana': skillIconVariants('grafana'),
+  'Sentry': skillIcon('sentry'),
 
   // Editors & IDEs
-  'Vim': 'vim',
-  'Obsidian': 'obsidian',
-  'IntelliJ IDEA': 'idea',
+  'Vim': skillIconVariants('vim'),
+  'Obsidian': skillIconVariants('obsidian'),
+  'IntelliJ IDEA': skillIconVariants('idea'),
 
   // Social & Other
-  'Mastodon': 'mastodon',
-  'WordPress': 'wordpress',
-  'Markdown': 'md',
+  'Mastodon': skillIconVariants('mastodon'),
+  'WordPress': skillIcon('wordpress'),
+  'Markdown': skillIconVariants('markdown'),
 };
 
 const techCategories = [
@@ -86,7 +97,7 @@ const techCategories = [
   },
   {
     name: t.techStack.cloud,
-    techs: ['Cloudflare', 'Azure', 'Netlify', 'Vercel', 'Kubernetes', 'Docker', 'Nginx'],
+    techs: ['Cloudflare', 'Azure', 'Netlify', 'Vercel', 'Kubernetes', 'Rancher', 'Docker', 'Nginx'],
   },
   {
     name: t.techStack.devops,
@@ -98,7 +109,13 @@ const techCategories = [
   },
 ];
 
-const allTechs = techCategories.flatMap(cat => cat.techs);
+const getTechIconEntry = (tech: string): IconEntry => {
+  if (techIconMap[tech]) {
+    return techIconMap[tech];
+  }
+  const normalized = tech.toLowerCase().replace(/[^a-z0-9]+/g, '');
+  return skillIcon(normalized);
+};
 ---
 
 <section class="tech-stack">
@@ -112,15 +129,24 @@ const allTechs = techCategories.flatMap(cat => cat.techs);
         <h3 class="category-name">{category.name}</h3>
         <div class="tech-tags">
           {category.techs.map((tech) => {
-            const iconId = techIconMap[tech] || tech.toLowerCase();
+            const iconEntry = getTechIconEntry(tech);
             return (
               <div class="tech-tag">
-                <img
-                  src={`https://skillicons.dev/icons?i=${iconId}`}
-                  alt={tech}
-                  class="tech-icon"
-                  loading="lazy"
-                />
+                {typeof iconEntry === 'string' ? (
+                  <Icon name={iconEntry} class="tech-icon icon-single" aria-label={tech} />
+                ) : 'src' in iconEntry ? (
+                  <img
+                    src={iconEntry.src}
+                    alt={tech}
+                    class="tech-icon icon-single"
+                    loading="lazy"
+                  />
+                ) : (
+                  <>
+                    <Icon name={iconEntry.light} class="tech-icon icon-light" aria-label={tech} />
+                    <Icon name={iconEntry.dark} class="tech-icon icon-dark" aria-label={tech} />
+                  </>
+                )}
                 <span class="tech-name">{tech}</span>
               </div>
             );
@@ -208,6 +234,20 @@ const allTechs = techCategories.flatMap(cat => cat.techs);
   height: 18px;
   object-fit: contain;
   flex-shrink: 0;
+  display: inline-block;
+  color: var(--text-color);
+}
+
+.tech-icon.icon-dark {
+  display: none;
+}
+
+html[data-theme="dark"] .tech-icon.icon-light {
+  display: none;
+}
+
+html[data-theme="dark"] .tech-icon.icon-dark {
+  display: inline-block;
 }
 
 .tech-name {
