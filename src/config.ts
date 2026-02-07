@@ -227,5 +227,11 @@ export const labConfig: LabConfig = [
         url: "https://evjp.life",
         icon: "fa6-solid:house",
         color: "#43a4d1ff"
+    },
+    {
+        name: "Fast Note Sync",
+        description: "Fast note sync service",
+        url: "https://ob.einverne.info",
+        icon: "fa6-solid:bolt"
     }
 ]
