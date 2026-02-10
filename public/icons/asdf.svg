@@ -1,0 +1,5 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="5" width="110" height="110" rx="16" fill="#1e1e2e"/>
+  <text x="60" y="72" font-family="monospace, 'Courier New'" font-size="32" font-weight="bold" fill="#cdd6f4" text-anchor="middle">asdf</text>
+  <rect x="20" y="85" width="80" height="3" rx="1.5" fill="#89b4fa" opacity="0.6"/>
+</svg>
