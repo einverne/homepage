@@ -78,6 +78,8 @@ export const translations = {
       rancherDescription: 'Kubernetes 集群管理',
       honoName: 'Hono',
       honoDescription: '云存储服务',
+      digitalGardenName: '数字花园',
+      digitalGardenDescription: '个人知识库与数字花园',
     },
     techStack: {
       title: '技术栈',
@@ -214,6 +216,8 @@ export const translations = {
       rancherDescription: 'Kubernetes Cluster',
       honoName: 'Hono Cloudflare R2',
       honoDescription: 'Cloud Storage Service',
+      digitalGardenName: 'Digital Garden',
+      digitalGardenDescription: 'Personal knowledge base & digital garden',
     },
     techStack: {
       title: 'Tech Stack',
@@ -350,6 +354,8 @@ export const translations = {
       rancherDescription: 'Kubernetesクラスター管理',
       honoName: 'Hono Cloudflare R2',
       honoDescription: 'クラウドストレージサービス',
+      digitalGardenName: 'デジタルガーデン',
+      digitalGardenDescription: '個人ナレッジベース＆デジタルガーデン',
     },
     techStack: {
       title: '技術スタック',
