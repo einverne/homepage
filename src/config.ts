@@ -142,6 +142,21 @@ export const labConfig: LabConfig = [
     },
     {
         name: {
+            zh: "日本税负计算器",
+            en: "Japan Tax Calculator",
+            ja: "日本税負担シミュレーター",
+        },
+        description: {
+            zh: "日本薪资所得税、住民税、社会保险扣除计算",
+            en: "Calculate Japanese income tax, resident tax, and social insurance",
+            ja: "所得税・住民税・社会保険料の控除額を計算",
+        },
+        url: "/zh/tools/japan-tax",
+        icon: "fa6-solid:yen-sign",
+        color: "#ef4444"
+    },
+    {
+        name: {
             zh: "EV 托管",
             en: "EV Hosting",
             ja: "EV ホスティング",
