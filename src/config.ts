@@ -157,6 +157,66 @@ export const labConfig: LabConfig = [
     },
     {
         name: {
+            zh: "工具箱",
+            en: "Tools",
+            ja: "ツール",
+        },
+        description: {
+            zh: "常用在线工具集合",
+            en: "A collection of useful online tools",
+            ja: "便利なオンラインツール集",
+        },
+        url: "https://tools.einverne.info/",
+        icon: "fa6-solid:screwdriver-wrench",
+        color: "#f59e0b"
+    },
+    {
+        name: {
+            zh: "OpenList",
+            en: "OpenList",
+            ja: "OpenList",
+        },
+        description: {
+            zh: "OpenList 开源文件列表服务",
+            en: "OpenList open-source file listing service",
+            ja: "OpenList オープンソースのファイルリストサービス",
+        },
+        url: "https://openlist.einverne.info",
+        icon: "fa6-solid:folder-open",
+        color: "#f97316"
+    },
+    {
+        name: {
+            zh: "SearXNG",
+            en: "SearXNG",
+            ja: "SearXNG",
+        },
+        description: {
+            zh: "SearXNG 开源元搜索引擎",
+            en: "SearXNG open-source metasearch engine",
+            ja: "SearXNG オープンソースのメタサーチエンジン",
+        },
+        url: "https://s.einverne.info",
+        icon: "fa6-solid:magnifying-glass",
+        color: "#0ea5e9"
+    },
+    {
+        name: {
+            zh: "旋律",
+            en: "Melody",
+            ja: "メロディー",
+        },
+        description: {
+            zh: "音乐与旋律相关服务",
+            en: "A service for music and melodies",
+            ja: "音楽とメロディーに関するサービス",
+        },
+        url: "https://melody.einverne.info/",
+        icon: "fa6-solid:music",
+        color: "#06b6d4"
+    },
+    {
+        name: {
             zh: "EV 托管",
             en: "EV Hosting",
             ja: "EV ホスティング",
@@ -214,6 +274,21 @@ export const labConfig: LabConfig = [
         url: "https://nz.einverne.info",
         icon: "fa6-solid:microchip",
         color: "#50b8e9ff"
+    },
+    {
+        name: {
+            zh: "监控",
+            en: "Monitor",
+            ja: "モニター",
+        },
+        description: {
+            zh: "开源监控服务",
+            en: "An open-source monitoring service",
+            ja: "オープンソースの監視サービス",
+        },
+        url: "https://monitor.einverne.info/",
+        icon: "fa6-solid:gauge-high",
+        color: "#14b8a6"
     },
     {
         name: {
