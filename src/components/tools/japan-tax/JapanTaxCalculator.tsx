@@ -20,6 +20,7 @@ export interface JapanTaxTranslations {
     ageUnder40: string;
     age40Plus: string;
     salaryUnit: string;
+    salaryYen: string;
   };
   summary: {
     takeHome: string;

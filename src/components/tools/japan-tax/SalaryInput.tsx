@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import type { TaxInput } from './types';
@@ -13,15 +13,46 @@ interface SalaryInputProps {
     ageUnder40: string;
     age40Plus: string;
     salaryUnit: string;
+    salaryYen: string;
   };
+}
+
+function clampSalary(value: number): number {
+  return Math.min(Math.max(value, SALARY_MIN), SALARY_MAX);
 }
 
 export function SalaryInput({ input, onChange, translations: t }: SalaryInputProps) {
   const salaryInMan = Math.round(input.annualSalary / 10000);
 
+  // Local state for the yen input to allow free typing
+  const [yenInputValue, setYenInputValue] = useState(input.annualSalary.toString());
+  const [isYenFocused, setIsYenFocused] = useState(false);
+
+  const handleYenChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value;
+    setYenInputValue(raw);
+    const parsed = parseInt(raw.replace(/,/g, ''));
+    if (!isNaN(parsed) && parsed > 0) {
+      onChange({ annualSalary: clampSalary(parsed) });
+    }
+  }, [onChange]);
+
+  const handleYenBlur = useCallback(() => {
+    setIsYenFocused(false);
+    setYenInputValue(input.annualSalary.toString());
+  }, [input.annualSalary]);
+
+  const handleYenFocus = useCallback(() => {
+    setIsYenFocused(true);
+    setYenInputValue(input.annualSalary.toString());
+  }, [input.annualSalary]);
+
+  // Sync yen input when salary changes externally (slider, man input) and field is not focused
+  const displayYenValue = isYenFocused ? yenInputValue : input.annualSalary.toLocaleString();
+
   return (
     <div className="space-y-5">
-      {/* Annual Salary */}
+      {/* Annual Salary - Man unit */}
       <div className="space-y-2">
         <Label className="text-sm font-medium">{t.annualSalary}</Label>
         <div className="flex items-center gap-2">
@@ -30,7 +61,7 @@ export function SalaryInput({ input, onChange, translations: t }: SalaryInputPro
             value={salaryInMan}
             onChange={(e) => {
               const val = parseInt(e.target.value) || 0;
-              onChange({ annualSalary: Math.min(Math.max(val * 10000, SALARY_MIN), SALARY_MAX) });
+              onChange({ annualSalary: clampSalary(val * 10000) });
             }}
             className="w-24 text-right"
             min={SALARY_MIN / 10000}
@@ -38,6 +69,22 @@ export function SalaryInput({ input, onChange, translations: t }: SalaryInputPro
           />
           <span className="text-sm text-muted-foreground">{t.salaryUnit}</span>
         </div>
+
+        {/* Direct yen input */}
+        <div className="flex items-center gap-2">
+          <Input
+            type="text"
+            inputMode="numeric"
+            value={displayYenValue}
+            onChange={handleYenChange}
+            onFocus={handleYenFocus}
+            onBlur={handleYenBlur}
+            className="flex-1 text-right"
+            placeholder="5,000,000"
+          />
+          <span className="text-sm text-muted-foreground">{t.salaryYen}</span>
+        </div>
+
         <input
           type="range"
           min={SALARY_MIN}

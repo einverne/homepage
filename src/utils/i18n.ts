@@ -177,6 +177,7 @@ export const translations = {
         ageUnder40: '40岁以下',
         age40Plus: '40岁以上',
         salaryUnit: '万日元',
+        salaryYen: '日元',
       },
       summary: {
         takeHome: '到手收入',
@@ -377,6 +378,7 @@ export const translations = {
         ageUnder40: 'Under 40',
         age40Plus: '40 and Over',
         salaryUnit: 'Man JPY',
+        salaryYen: 'JPY',
       },
       summary: {
         takeHome: 'Take-Home Pay',
@@ -577,6 +579,7 @@ export const translations = {
         ageUnder40: '40歳未満',
         age40Plus: '40歳以上',
         salaryUnit: '万円',
+        salaryYen: '円',
       },
       summary: {
         takeHome: '手取り額',
