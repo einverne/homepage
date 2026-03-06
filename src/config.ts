@@ -331,7 +331,7 @@ export const labConfig: LabConfig = [
             en: "A website analytics platform",
             ja: "Webサイト分析プラットフォーム",
         },
-        url: "https://umami.einverne.info",
+        url: "https://u.einverne.info",
         icon: {
             light: "/icons/umami.svg",
             dark: "/icons/umami-light.svg",
@@ -474,5 +474,275 @@ export const labConfig: LabConfig = [
         },
         url: "https://ob.einverne.info",
         icon: "fa6-solid:bolt"
+    },
+    {
+        name: {
+            zh: "BookStack",
+            en: "BookStack",
+            ja: "BookStack",
+        },
+        description: {
+            zh: "自托管的 Wiki 知识库",
+            en: "Self-hosted wiki knowledge base",
+            ja: "セルフホスト型 Wiki ナレッジベース",
+        },
+        url: "https://bs.einverne.info",
+        icon: "fa6-solid:book",
+        color: "#1b6ec2"
+    },
+    {
+        name: {
+            zh: "FreshRSS",
+            en: "FreshRSS",
+            ja: "FreshRSS",
+        },
+        description: {
+            zh: "自托管的 RSS 阅读器",
+            en: "Self-hosted RSS reader",
+            ja: "セルフホスト型 RSS リーダー",
+        },
+        url: "https://freshrss.einverne.info",
+        icon: "fa6-solid:rss",
+        color: "#f36d25"
+    },
+    {
+        name: {
+            zh: "Gitea",
+            en: "Gitea",
+            ja: "Gitea",
+        },
+        description: {
+            zh: "自托管的 Git 代码托管",
+            en: "Self-hosted Git service",
+            ja: "セルフホスト型 Git サービス",
+        },
+        url: "https://gitea.einverne.info",
+        icon: "simple-icons:gitea",
+        color: "#609926"
+    },
+    {
+        name: {
+            zh: "IT Tools",
+            en: "IT Tools",
+            ja: "IT Tools",
+        },
+        description: {
+            zh: "开发者常用工具集",
+            en: "Handy tools for developers",
+            ja: "開発者向けの便利ツール集",
+        },
+        url: "https://tools.einverne.info",
+        icon: "fa6-solid:toolbox",
+        color: "#5468ff"
+    },
+    {
+        name: {
+            zh: "Memos",
+            en: "Memos",
+            ja: "Memos",
+        },
+        description: {
+            zh: "轻量级自托管备忘录",
+            en: "Lightweight self-hosted memo hub",
+            ja: "軽量セルフホスト型メモ",
+        },
+        url: "https://memos.einverne.info",
+        icon: "fa6-solid:note-sticky",
+        color: "#f59e0b"
+    },
+    {
+        name: {
+            zh: "SearXNG",
+            en: "SearXNG",
+            ja: "SearXNG",
+        },
+        description: {
+            zh: "隐私优先的元搜索引擎",
+            en: "Privacy-respecting metasearch engine",
+            ja: "プライバシー重視のメタ検索エンジン",
+        },
+        url: "https://s.einverne.info",
+        icon: "fa6-solid:magnifying-glass",
+        color: "#3050ff"
+    },
+    {
+        name: {
+            zh: "Shaarli",
+            en: "Shaarli",
+            ja: "Shaarli",
+        },
+        description: {
+            zh: "自托管的书签管理",
+            en: "Self-hosted bookmark manager",
+            ja: "セルフホスト型ブックマーク管理",
+        },
+        url: "https://shaarli.einverne.info",
+        icon: "fa6-solid:bookmark",
+        color: "#7bc67e"
+    },
+    {
+        name: {
+            zh: "Melody",
+            en: "Melody",
+            ja: "Melody",
+        },
+        description: {
+            zh: "自托管的音乐流媒体",
+            en: "Self-hosted music streaming",
+            ja: "セルフホスト型音楽ストリーミング",
+        },
+        url: "https://melody.einverne.info",
+        icon: "fa6-solid:music",
+        color: "#e91e63"
+    },
+    {
+        name: {
+            zh: "Owncast",
+            en: "Owncast",
+            ja: "Owncast",
+        },
+        description: {
+            zh: "自托管的直播平台",
+            en: "Self-hosted live streaming",
+            ja: "セルフホスト型ライブ配信",
+        },
+        url: "https://owncast.einverne.info",
+        icon: "fa6-solid:tower-broadcast",
+        color: "#7c3aed"
+    },
+    {
+        name: {
+            zh: "Komari",
+            en: "Komari",
+            ja: "Komari",
+        },
+        description: {
+            zh: "轻量服务器监控面板",
+            en: "Lightweight server monitoring dashboard",
+            ja: "軽量サーバー監視ダッシュボード",
+        },
+        url: "https://monitor.einverne.info",
+        icon: "fa6-solid:chart-area",
+        color: "#06b6d4"
+    },
+    {
+        name: {
+            zh: "OpenList",
+            en: "OpenList",
+            ja: "OpenList",
+        },
+        description: {
+            zh: "文件列表与网盘管理",
+            en: "File listing and cloud drive manager",
+            ja: "ファイル一覧とクラウドドライブ管理",
+        },
+        url: "https://openlist.einverne.info",
+        icon: "fa6-solid:folder-open",
+        color: "#2196f3"
+    },
+    {
+        name: {
+            zh: "Vaultwarden",
+            en: "Vaultwarden",
+            ja: "Vaultwarden",
+        },
+        description: {
+            zh: "自托管的密码管理器",
+            en: "Self-hosted password manager",
+            ja: "セルフホスト型パスワード管理",
+        },
+        url: "https://bw.einverne.info",
+        icon: "fa6-solid:shield-halved",
+        color: "#175ddc"
+    },
+    {
+        name: {
+            zh: "VoceChat",
+            en: "VoceChat",
+            ja: "VoceChat",
+        },
+        description: {
+            zh: "轻量级团队聊天服务",
+            en: "Lightweight team chat service",
+            ja: "軽量チームチャットサービス",
+        },
+        url: "https://vc.einverne.info",
+        icon: "fa6-solid:comments",
+        color: "#6366f1"
+    },
+    {
+        name: {
+            zh: "ChatGPT Next Web",
+            en: "ChatGPT Next Web",
+            ja: "ChatGPT Next Web",
+        },
+        description: {
+            zh: "AI 对话助手",
+            en: "AI chat assistant",
+            ja: "AIチャットアシスタント",
+        },
+        url: "https://chatgpt.einverne.info",
+        icon: "fa6-solid:robot",
+        color: "#10a37f"
+    },
+    {
+        name: {
+            zh: "Subconverter",
+            en: "Subconverter",
+            ja: "Subconverter",
+        },
+        description: {
+            zh: "订阅转换工具",
+            en: "Subscription converter",
+            ja: "サブスクリプション変換ツール",
+        },
+        url: "https://sub.einverne.info",
+        icon: "fa6-solid:arrows-rotate",
+        color: "#f59e0b"
+    },
+    {
+        name: {
+            zh: "HeyForm",
+            en: "HeyForm",
+            ja: "HeyForm",
+        },
+        description: {
+            zh: "开源表单构建工具",
+            en: "Open source form builder",
+            ja: "オープンソースフォームビルダー",
+        },
+        url: "https://form.einverne.info",
+        icon: "fa6-solid:file-lines",
+        color: "#8b5cf6"
+    },
+    {
+        name: {
+            zh: "NocoDB",
+            en: "NocoDB",
+            ja: "NocoDB",
+        },
+        description: {
+            zh: "开源数据库管理平台",
+            en: "Open source database platform",
+            ja: "オープンソースデータベースプラットフォーム",
+        },
+        url: "https://noco.einverne.info",
+        icon: "fa6-solid:table",
+        color: "#1d4ed8"
+    },
+    {
+        name: {
+            zh: "Karakeep",
+            en: "Karakeep",
+            ja: "Karakeep",
+        },
+        description: {
+            zh: "稍后阅读与书签管理",
+            en: "Read-it-later and bookmark manager",
+            ja: "あとで読むとブックマーク管理",
+        },
+        url: "https://reader.einverne.info",
+        icon: "fa6-solid:book-bookmark",
+        color: "#ef4444"
     }
 ]
