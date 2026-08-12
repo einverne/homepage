@@ -134,9 +134,9 @@ const getTechIconEntry = (tech: string): IconEntry => {
 };
 ---
 
-<section class="tech-stack">
+<section class="tech-stack card-surface">
   <div class="header">
-    <h2>{t.techStack.title}</h2>
+    <h2 class="gradient-heading">{t.techStack.title}</h2>
   </div>
 
   <div class="tech-categories">
@@ -176,13 +176,8 @@ const getTechIconEntry = (tech: string): IconEntry => {
 
 <style>
 .tech-stack {
-  background: var(--color-content-bg);
-  border: 1px solid color-mix(in srgb, var(--border-color) 45%, transparent);
-  border-radius: 16px;
   padding: 20px;
-  box-shadow: 0 8px 24px var(--color-shadow);
   width: 100%;
-  box-sizing: border-box;
 }
 
 .header {
@@ -192,10 +187,6 @@ const getTechIconEntry = (tech: string): IconEntry => {
 .header h2 {
   font-size: 1.3rem;
   margin: 0;
-  background: linear-gradient(135deg, var(--link-color), color-mix(in srgb, var(--link-color) 70%, #9333ea));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .tech-categories {

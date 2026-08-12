@@ -25,3 +25,9 @@ pnpm-debug.log*
 
 # vscode setting folder
 .vscode/
+
+# serena setting folder
+.serena/
+
+# claude setting folder
+.claude/

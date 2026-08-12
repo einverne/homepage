@@ -6,7 +6,7 @@ const locale = getLocale(Astro.currentLocale);
 const t = getTranslations(locale);
 ---
 
-<section class="recent-posts">
+<section class="recent-posts card-surface">
   <div class="header">
     <h2>{t.common.latestPosts}</h2>
     <a class="more" href="https://blog.einverne.info" target="_blank" rel="noreferrer">{t.common.more}</a>
@@ -28,16 +28,11 @@ const t = getTranslations(locale);
 
 <style>
 .recent-posts {
-  background: var(--color-content-bg);
-  border: 1px solid color-mix(in srgb, var(--border-color) 45%, transparent);
-  border-radius: 16px;
   padding: 20px 24px;
-  box-shadow: 0 8px 24px var(--color-shadow);
   flex: 1 1 0;
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  box-sizing: border-box;
 }
 
 .header {

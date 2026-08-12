@@ -109,6 +109,23 @@ const localeLangTag = getLocaleLangTag(Astro.currentLocale);
     --color-shadow: rgba(255, 255, 255, 0.1);
 }
 
+/* 内容卡片通用外观，供首页各区块（Projects/TechStack/RecentPosts/LatestVideo 等）复用 */
+.card-surface {
+    background: var(--color-content-bg);
+    border: 1px solid color-mix(in srgb, var(--border-color) 45%, transparent);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px var(--color-shadow);
+    box-sizing: border-box;
+}
+
+/* 渐变标题文字，供带有强调标题的卡片复用 */
+.gradient-heading {
+    background: linear-gradient(135deg, var(--link-color), color-mix(in srgb, var(--link-color) 70%, #9333ea));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
 .layout-body { 
     display: flex;
     flex-direction: column;
