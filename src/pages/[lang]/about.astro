@@ -1,0 +1,174 @@
+---
+import Layout from '@layouts/Layout.astro';
+import HomeIcon from '@components/control/HomeIcon.astro';
+import IconModule from '@components/misc/IconModule.astro';
+import { getTranslations, getLocaleStaticPaths, type SupportedLocale } from '@/utils/i18n';
+
+export function getStaticPaths() {
+  return getLocaleStaticPaths('lang');
+}
+
+const { lang } = Astro.params;
+const locale = lang as SupportedLocale;
+const t = getTranslations(locale);
+
+const keywordLinks = [
+  { pattern: /self-hosted|セルフホスト|自托管/i, url: 'https://github.com/einverne/dockerfile' },
+  { pattern: /Japan|日本/i, url: 'https://evjp.life' },
+];
+
+function linkify(text: string): string {
+  let html = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  for (const { pattern, url } of keywordLinks) {
+    html = html.replace(
+      pattern,
+      (match) => `<a href="${url}" target="_blank" rel="noreferrer" class="inline-link">${match}</a>`
+    );
+  }
+  return html;
+}
+
+const contactLinks = [
+  { name: 'Telegram', url: 'https://t.me/einverne', icon: 'simple-icons:telegram', color: '#26A5E4' },
+  { name: 'Mastodon', url: 'https://m.einverne.info/@einverne', icon: 'simple-icons:mastodon', color: '#6364FF' },
+  { name: 'Mail', url: 'mailto:admin@einverne.info', icon: 'fa6-solid:envelope', color: '#43a4d1ff' },
+];
+---
+
+<Layout title={t.about.title}>
+  <HomeIcon />
+  <div class="container">
+    <section class="about-intro card-surface">
+      <h1>{t.about.title}</h1>
+      {t.about.intro.map((paragraph) => <p set:html={linkify(paragraph)} />)}
+    </section>
+
+    <section class="about-currently card-surface">
+      <h2>{t.about.currentlyTitle}</h2>
+      <ul>
+        {t.about.currently.map((item) => (
+          <li>
+            <span class="item-title">{item.title}</span>
+            <span class="item-text" set:html={linkify(item.text)} />
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="about-contact card-surface">
+      <h2>{t.about.contactTitle}</h2>
+      <div class="contact-links">
+        {contactLinks.map((link) => (
+          <a href={link.url} target="_blank" rel="noreferrer" class="contact-link">
+            <IconModule icon={link.icon} size={20} color={link.color} label={link.name} />
+            <span>{link.name}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  section {
+    padding: 24px 28px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    margin: 0 0 1rem;
+    color: var(--text-color);
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    margin: 0 0 1rem;
+    color: var(--text-color);
+  }
+
+  .about-intro p {
+    color: var(--text-color);
+    line-height: 1.8;
+    margin: 0 0 1rem;
+  }
+
+  .about-intro p:last-child {
+    margin-bottom: 0;
+  }
+
+  .about-intro :global(a.inline-link),
+  .about-currently :global(a.inline-link) {
+    color: var(--link-color);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .about-currently ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .about-currently li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+  }
+
+  .item-title {
+    flex-shrink: 0;
+    font-weight: 600;
+    color: var(--link-color);
+    min-width: 3.5em;
+  }
+
+  .item-text {
+    color: var(--motto-text-color);
+    line-height: 1.6;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid color-mix(in srgb, var(--border-color) 45%, transparent);
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+  }
+
+  .contact-link:hover {
+    background-color: color-mix(in srgb, var(--link-color) 10%, transparent);
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 1rem;
+    }
+
+    section {
+      padding: 20px;
+    }
+  }
+</style>

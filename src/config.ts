@@ -109,6 +109,12 @@ export const profileConfig: ProfileConfig = {
             color: "#72b6b3",
         },
         {
+            name: "About",
+            url: "/about",
+            icon: "fa6-solid:circle-user",
+            color: "#72b6b3",
+        },
+        {
             name: "Lab",
             url: "/lab",
             icon: "fa6-solid:flask",

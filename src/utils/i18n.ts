@@ -67,6 +67,22 @@ export const translations = {
     profile: {
       description: 'Ein Verne 的网络日志',
     },
+    about: {
+      title: '关于我',
+      intro: [
+        '大家好，我通常在网上称呼自己 Ein Verne —— 这只是很多年前随手起的英文名，后来就一直沿用了下来。我喜欢写点东西，博客里大多是技术笔记，也夹杂一些生活和思考。',
+        '我是一个兴趣很杂的人：看书看电影，写点影评和随笔，都算不上专业，只是记录自己的所思所想。这些年我也在逐渐把个人数据从 Google 系服务迁移到自托管方案上，折腾出了不少 self-hosted 服务。',
+        '2023 年初我来到日本工作生活，另外开了一个博客专门记录在日本的日常。如果你对日本生活有任何好奇，也欢迎通过下面的方式找我聊聊。',
+        '平时还喜欢听播客、看剧，偶尔也会研究一些游戏和数码设备。保持好奇心，去了解不同的领域、认识不同的人，大概是我一直在做的事。',
+      ],
+      currentlyTitle: '目前',
+      currently: [
+        { title: '生活', text: '在日本工作与生活，记录日常与语言学习' },
+        { title: '折腾', text: '维护着一批 self-hosted 服务（见首页「项目展示」），偏爱开源、可自建的工具' },
+        { title: '写作', text: '以技术笔记为主，偶尔记录一些思考与生活' },
+      ],
+      contactTitle: '更多联系方式',
+    },
     projects: {
       title: '项目展示',
       akiName: 'Aki 日语辞书',
@@ -271,6 +287,22 @@ export const translations = {
     profile: {
       description: 'Ein Verne\'s Web Log',
     },
+    about: {
+      title: 'About',
+      intro: [
+        'Hi, I usually go by Ein Verne online — it\'s just an English name I picked years ago that stuck. I like writing; most of what\'s on my blog ends up being technical notes, mixed with the occasional thought on life.',
+        'I have fairly broad interests: books, movies, the odd review or essay — nothing professional, just things I want to remember. Over the years I\'ve also been gradually moving my personal data away from Google\'s services toward self-hosted alternatives, which is how I ended up running a small pile of self-hosted services.',
+        'I moved to Japan for work in early 2023, and started a separate blog to document day-to-day life here. If you\'re curious about anything Japan-related, feel free to reach out.',
+        'I\'m also into podcasts, dramas, and occasionally tinkering with gadgets and games. Staying curious — exploring new fields and meeting new people — is probably the closest thing I have to a life philosophy.',
+      ],
+      currentlyTitle: 'Currently',
+      currently: [
+        { title: 'Living', text: 'Based in Japan, documenting daily life and language learning' },
+        { title: 'Tinkering', text: 'Running a handful of self-hosted services (see the Projects section on the homepage), preferring open, self-hostable tools' },
+        { title: 'Writing', text: 'Mostly technical notes, occasionally life and thoughts' },
+      ],
+      contactTitle: 'More ways to reach me',
+    },
     projects: {
       title: 'Projects',
       akiName: 'Aki Japanese Dictionary',
@@ -474,6 +506,22 @@ export const translations = {
     },
     profile: {
       description: 'Ein Verne のウェブログ',
+    },
+    about: {
+      title: '私について',
+      intro: [
+        'こんにちは、ネット上では普段 Ein Verne と名乗っています。何年も前に適当につけた英語名がそのまま定着しただけです。文章を書くのが好きで、ブログの内容はほとんど技術メモですが、たまに生活や考えたことも書いています。',
+        '興味の幅は結構広く、本や映画を見たり、感想やエッセイを書いたりしますが、どれも専門的なものではなく、自分の考えを記録しているだけです。ここ数年は個人データを Google のサービスから徐々にセルフホスト環境へ移行してきたので、その過程でいくつものセルフホストサービスを運用するようになりました。',
+        '2023 年初めに仕事で日本に来て、日本での生活を記録する専用ブログも始めました。日本での暮らしについて気になることがあれば、ぜひ下記の連絡先から気軽に声をかけてください。',
+        '普段はポッドキャストやドラマを楽しんだり、たまにゲームやガジェットをいじったりもします。好奇心を持ち続けて、いろいろな分野を知り、いろいろな人と出会うこと —— それが自分にとって一番近い生き方だと思います。',
+      ],
+      currentlyTitle: '今',
+      currently: [
+        { title: '生活', text: '日本で仕事・生活をしながら、日々の暮らしと語学学習を記録' },
+        { title: 'DIY', text: 'いくつかのセルフホストサービスを運用中(トップページの「プロジェクト」参照)。オープンで自前運用できるツールを好む' },
+        { title: '執筆', text: '主に技術メモ、たまに生活や考えたことも' },
+      ],
+      contactTitle: '他の連絡方法',
     },
     projects: {
       title: 'プロジェクト',
