@@ -1,15 +1,23 @@
 ---
 const { posts = [] } = Astro.props;
+import { Icon } from 'astro-icon/components';
 import { getLocale, getTranslations } from '@/utils/i18n';
 
 const locale = getLocale(Astro.currentLocale);
 const t = getTranslations(locale);
+const feedUrl = 'https://blog.einverne.info/feed.xml';
 ---
 
 <section class="recent-posts card-surface">
   <div class="header">
     <h2>{t.common.latestPosts}</h2>
-    <a class="more" href="https://blog.einverne.info" target="_blank" rel="noreferrer">{t.common.more}</a>
+    <div class="header-actions">
+      <a class="subscribe" href={feedUrl} target="_blank" rel="noreferrer" title={t.common.subscribe} aria-label={t.common.subscribe}>
+        <Icon name="fa6-solid:rss" class="subscribe-icon" />
+        {t.common.subscribe}
+      </a>
+      <a class="more" href="https://blog.einverne.info" target="_blank" rel="noreferrer">{t.common.more}</a>
+    </div>
   </div>
   <ul>
     {posts.length === 0 && (
@@ -47,10 +55,35 @@ const t = getTranslations(locale);
   margin: 0;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .more {
   font-size: 0.85rem;
   color: var(--link-color);
   text-decoration: none;
+}
+
+.subscribe {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: var(--motto-text-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.subscribe:hover {
+  color: var(--link-color);
+}
+
+.subscribe-icon {
+  width: 0.9em;
+  height: 0.9em;
 }
 
 ul {
